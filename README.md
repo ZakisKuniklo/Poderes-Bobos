@@ -3,7 +3,12 @@ Sistema em python que armazena nomes de super poderes imaginados, suas descriç�
 Um jogo de imaginação simples e divertido!
 --------------------------------------------------------------------------------------------------------------------
 Regras ao adicionar:
-- Deve ser um poder:
- -Bobo;
- -Específico;
- -Não prejudicial ao usuário e outras pessoas.
+ <ul>
+  <li>Deve ser um poder:
+    <ul>
+      <li>Bobo;</li>
+      <li>Específico;</li>
+     <li>Não prejudicial ao usuário e outras pessoas.</li>
+    </ul>
+  </li>
+</ul>
