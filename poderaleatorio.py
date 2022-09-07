@@ -28,6 +28,13 @@ def loadTable(path):
     #print("tabela do arquivo '" + str(path)+"' carregada")
     return tabela
 
+def listaNomePoder():
+    tabela = loadTable(file1)
+    lista = list()
+    for linha in tabela:
+        lista.append(linha["nome"].copy())
+    return lista
+
 def addPoder():
     nome = input("digite o nome do poder:")
     desc = input("digite a descrição desse poder:")
@@ -42,12 +49,7 @@ def listaPoder():
 def pegaPoder():
     lista = loadTable(file1)
     poder = random.choice(lista)
-    print("Seu poder é:")
-    print(str(poder["nome"])+"!!!")
-    print("O que seu poder faz? simples!")
-    print(str(poder["desc"]))
-    print("Legal né?")
-    print("Aproveite seu poder!!!")
+    return poder
 
 
 #addPoder()

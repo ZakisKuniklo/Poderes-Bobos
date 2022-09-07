@@ -12,11 +12,33 @@ def telaInicial():
         [sg.Button('Sair')]
     ]
 
-    janela = sg.Window('Tela inicial',layout,size=(200, 150))
+    return sg.Window('Tela inicial',layout,size=(200, 150))
 
-    while True:
-        eventos, valores = janela.read()
-        if eventos == sg.WINDOW_CLOSED or eventos == 'Sair':
-            break
+def telaLista():
+    sg.theme('Dark Green')
+    layout = [
+        [sg.Listbox(pa.listaNomePoder(),select_mode='extended',size=(30, 6))],
+        [sg.Button('Comentar'),sg.Button('Voltar')]
+    ]
 
-telaInicial()
+    return sg.Window('Tela lista',layout)
+
+def telaPoder():
+    poder = pa.pegaPoder()
+    sg.theme('Dark Green')
+    layout = [
+        [sg.Text('Seu poder é:',text_color='white')],
+        [sg.Text(str(poder["nome"])+"!!!",text_color='white')],
+        [sg.Text('O que seu poder faz? simples!',text_color='white')],
+        [sg.Text('Seu poder é:',text_color='white')],
+        [sg.Text(str(poder["desc"]),text_color='white')],
+        [sg.Text('Legal né?',text_color='white')],
+        [sg.Text('Aproveite seu poder!!!',text_color='white')],
+    ]
+    return sg.Window('Tela poder',layout)
+
+def telaComment(poder):
+    sg.theme('Dark Green')
+    layout =[
+        [],
+    ]
