@@ -4,6 +4,6 @@ Um jogo de imaginação simples e divertido!
 --------------------------------------------------------------------------------------------------------------------
 Regras ao adicionar:
 - Deve ser um poder:
-  -Bobo;
-  -Específico;
-  -Não prejudicial ao usuário e outras pessoas.
+ -Bobo;
+ -Específico;
+ -Não prejudicial ao usuário e outras pessoas.
