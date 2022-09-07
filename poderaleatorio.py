@@ -25,6 +25,7 @@ def loadTable(path):
     for l in file.readlines():
         linha = ast.literal_eval(l)
         tabela.append(linha.copy())
+    file.close()
     #print("tabela do arquivo '" + str(path)+"' carregada")
     return tabela
 
@@ -32,7 +33,7 @@ def listaNomePoder():
     tabela = loadTable(file1)
     lista = list()
     for linha in tabela:
-        lista.append(linha["nome"].copy())
+        lista.append(linha["nome"])
     return lista
 
 def addPoder():
