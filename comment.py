@@ -13,8 +13,9 @@ def addComment(poder):
 def showComment(nomePoder):
     lista =poderaleatorio.loadTable(poderaleatorio.file2)
     comentarios = poderaleatorio.buscaItem(lista,"poder",nomePoder)
-    for i in sorted(comentarios):
-        print("usuário: "+ str(i["nome"]) + " poder: "+ str(i["poder"])+ "\n"+ str(i["data"]) + "\n"+str(i["comment"]))
+    return comentarios
+    #for i in sorted(comentarios):
+        #print("usuário: "+ str(i["nome"]) + " poder: "+ str(i["poder"])+ "\n"+ str(i["data"]) + "\n"+str(i["comment"]))
 
 poder = poderaleatorio.buscaItem(poderaleatorio.loadTable(poderaleatorio.file1),"nome","encheCaneta")
 #print(poder)

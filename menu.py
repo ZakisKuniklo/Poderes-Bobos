@@ -34,11 +34,22 @@ def telaPoder():
         [sg.Text(str(poder["desc"]),text_color='white')],
         [sg.Text('Legal né?',text_color='white')],
         [sg.Text('Aproveite seu poder!!!',text_color='white')],
+        [sg.Button('Comentar'),sg.Button('Voltar')]
     ]
     return sg.Window('Tela poder',layout)
 
 def telaComment(poder):
     sg.theme('Dark Green')
+    comentarios = cm.showComment(poder["nome"])
+    lista = list()
+    for i in sorted(comentarios):
+        lista.append("usuário: "+ str(i["nome"]) + " poder: "+ str(i["poder"])+ "\n"+ str(i["data"]) + "\n"+str(i["comment"]))
     layout =[
-        [],
+        [sg.Text('Poder: '+ str(poder["nome"]),text_color='white')],
+        [sg.Text(str(poder["desc"]),text_color='white')],
+        [sg.Listbox(lista,select_mode='extended',size=(30, 6))],
+        [sg.Button('Voltar')]
     ]
+
+def Menu():
+    
