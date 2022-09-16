@@ -22,12 +22,11 @@ def telaLista():
     ]
     return sg.Window('Tela lista',layout,finalize=True)
 
-def telaPoder():
-    poder = pa.pegaPoder()
+def telaPoder(poder):
     sg.theme('Dark Green')
     layout = [
         [sg.Text('Seu poder é:',text_color='white')],
-        [sg.Text(str(poder["nome"])+"!!!",text_color='white')],
+        [sg.Text(str(poder["nome"]),text_color='white')],
         [sg.Text('O que seu poder faz? simples!',text_color='white')],
         [sg.Text(str(poder["desc"]),text_color='white')],
         [sg.Text('Legal né?',text_color='white')],
@@ -45,7 +44,7 @@ def telaComment(poder):
     layout =[
         [sg.Text('Poder: '+ str(poder["nome"]),text_color='white')],
         [sg.Text(str(poder["desc"]),text_color='white')],
-        [sg.Listbox(lista,select_mode='extended',size=(60, 6),horizontal_scroll=True)],
+        [sg.Listbox(lista,select_mode='extended',size=(70, 6),horizontal_scroll=True)],
         [sg.Button('Voltar')]
     ]
     return sg.Window('Tela Comentários',layout,finalize=True)
@@ -54,19 +53,29 @@ def telaAddPoder():
     sg.theme('Dark Green')
     layout =[
         [sg.Text('Adicionar um novo poder:',text_color='white')],
-        [sg.Text('Nome:',text_color='white'),sg.Input(key='nomePoder')],
-        [sg.Multiline(key='desc')],
+        [sg.Text('Nome:      ',text_color='white'),sg.Input(key='nomePoder')],
+        [sg.Text('Descrição:',text_color='white'),sg.Multiline(key='desc',size=(40,5))],
         [sg.Button('Adicionar'),sg.Button('Voltar')]
     ]
-    return sg.Window('Tela vovo poder',layout,finalize=True)
+    return sg.Window('Tela novo poder',layout,finalize=True)
+
+def telaPoderAdicionado():
+    sg.theme('Dark Green')
+    layout =[
+        [sg.Text('Poder adicionado!',text_color='white')],
+        [sg.Button('Voltar')]
+    ]
+    return sg.Window('Poder adicionado!',layout,finalize=True)
 
 def menu():
-    janela1, janela2, janela3, janela4, janela5 = telaInicial(),None,None,None,None
+    poderAtual = None
+    janela1, janela2, janela3, janela4, janela5 ,janela6,janela7= telaInicial(),None,None,None,None,None,None
     janelaAtual = 0
     while True:
         window, event, values = sg.read_all_windows()
         if event== sg.WIN_CLOSED or event == 'Sair':
-            break
+            if window is not janela6:
+                break
         elif window == janela1 and event == 'Listar Poderes':
             janela2 = telaLista()
             janela1.hide()
@@ -87,11 +96,28 @@ def menu():
                 janela4.hide()
                 janela3.un_hide()
         elif window == janela1 and event == 'Ganhar Poder':
-            janela3 = telaPoder()
+            poderAtual = pa.pegaPoder()
+            janela3 = telaPoder(poderAtual)
             janela1.hide()
         elif window == janela3 and event == 'Voltar':
             janela3.hide()
             janela1.un_hide()
+        elif window == janela3 and event == 'Comentar':
+            janela3.hide()
+            janelaAtual = 3
+            janela4 = telaComment(poderAtual)
+        elif window == janela1 and event == 'Adicionar novo Poder':
+            janela1.hide()
+            janela5 = telaAddPoder()
+        elif window == janela5 and event == 'Voltar':
+            janela5.hide()
+            janela1.un_hide()
+        elif window == janela5 and event == 'Adicionar':
+            if values["nomePoder"] != "" and values["desc"] != "":
+                pa.addItem({"nome":values["nomePoder"],"desc":values["desc"]},pa.file1)
+                janela6 = telaPoderAdicionado()
+        elif window == janela6 and event == 'Voltar':
+            janela6.hide()
 menu()
 
     
