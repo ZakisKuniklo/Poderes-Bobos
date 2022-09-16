@@ -1,6 +1,5 @@
 #poder aleatório
 import ast
-from pyclbr import readmodule
 import random
 file1 = "./poder.txt"
 file2 = "./comment.txt"
