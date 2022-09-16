@@ -68,6 +68,8 @@ def telaPoderAdicionado():
     return sg.Window('Poder adicionado!',layout,finalize=True)
 
 def menu():
+    pa.criaArquivos(pa.file1)
+    pa.criaArquivos(pa.file2)
     poderAtual = None
     janela1, janela2, janela3, janela4, janela5 ,janela6,janela7= telaInicial(),None,None,None,None,None,None
     janelaAtual = 0

@@ -52,6 +52,10 @@ def pegaPoder():
     return poder
 
 
+def criaArquivos(path):
+    file = open(path,"a")
+    file.close()
+
 #addPoder()
 #print(loadTable(file1))
 #listaPoder()
