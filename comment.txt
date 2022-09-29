@@ -1,1 +1,2 @@
 {'nome': 'jp', 'poder': 'encheCaneta', 'comment': 'é legal se tiver como espirrar sempre ', 'data': '06/09/2022 19:04'}
+{'nome': 'jp', 'poder': 'DuploGosto', 'comment': 'É legal para roubar comida da geladeira kkkk', 'data': '29/09/2022 15:56'}

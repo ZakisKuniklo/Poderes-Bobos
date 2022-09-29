@@ -2,11 +2,11 @@
 import poderaleatorio
 from datetime import datetime
 
-def addComment(poder):
+def addComment(usuario,poder,texto):
     comentario = dict()
-    comentario["nome"] = input("insira seu nome: ")
+    comentario["nome"] = usuario
     comentario["poder"] = poder["nome"]
-    comentario["comment"] = input("insira seu comentário:")
+    comentario["comment"] = texto
     comentario["data"] = datetime.now().strftime('%d/%m/%Y %H:%M')
     poderaleatorio.addItem(comentario,poderaleatorio.file2)
 

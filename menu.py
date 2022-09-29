@@ -45,7 +45,7 @@ def telaComment(poder):
         [sg.Text('Poder: '+ str(poder["nome"]),text_color='white')],
         [sg.Text(str(poder["desc"]),text_color='white')],
         [sg.Listbox(lista,select_mode='extended',size=(70, 6),horizontal_scroll=True)],
-        [sg.Button('Voltar')]
+        [sg.Button('Voltar'),sg.Button('Adicionar comentario')]
     ]
     return sg.Window('Tela Comentários',layout,finalize=True)
 
@@ -66,6 +66,17 @@ def telaPoderAdicionado():
         [sg.Button('Voltar')]
     ]
     return sg.Window('Poder adicionado!',layout,finalize=True)
+
+def telaAddComment(poder):
+    sg.theme('Dark Green')
+    layout =[
+        [sg.Text('Adicionar um novo comentário:',text_color='white')],
+        [sg.Text('Nome poder: '+poder["nome"],text_color='white')],
+        [sg.Text('Nome usuário:',text_color='white'),sg.Input(key='nomeUsuario')],
+        [sg.Text('comentário:',text_color='white'),sg.Multiline(key='comentario',size=(40,5))],
+        [sg.Button('Adicionar'),sg.Button('Voltar')]
+    ]
+    return sg.Window('Adicionar Comentário',layout,finalize=True)
 
 def menu():
     pa.criaArquivos(pa.file1)
@@ -88,6 +99,7 @@ def menu():
             if values["ListaPoder"] is not None:
                 poder = pa.buscaItem(pa.loadTable(pa.file1),"nome",values["ListaPoder"][0])
                 janela4 = telaComment(poder[0])
+                poderAtual = poder[0]
                 janelaAtual = 2
                 janela2.hide()
         elif window == janela4 and event == 'Voltar':
@@ -120,6 +132,15 @@ def menu():
                 janela6 = telaPoderAdicionado()
         elif window == janela6 and event == 'Voltar':
             janela6.hide()
+        elif window == janela4 and event == 'Adicionar comentario':
+            janela7 = telaAddComment(poderAtual)
+            janela4.hide()
+        elif window == janela7 and event == 'Voltar':
+            janela7.hide()
+            janela4.un_hide()
+        elif window == janela7 and event == 'Adicionar':
+            cm.addComment(values["nomeUsuario"],poderAtual,values["comentario"])
+
 menu()
 
     

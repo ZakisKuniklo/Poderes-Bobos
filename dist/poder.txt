@@ -1,0 +1,2 @@
+{'nome': 'encheCaneta', 'desc': 'Toda vez que você espirra, qualquer caneta em sua mão tem sua carga completada.'}
+{'nome': 'DuploGosto', 'desc': 'Duplicar uma vez o alimento cujo gosto está na sua boca'}
