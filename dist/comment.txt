@@ -1,1 +1,0 @@
-{'nome': 'jp', 'poder': 'encheCaneta', 'comment': 'é legal se tiver como espirrar sempre ', 'data': '06/09/2022 19:04'}
