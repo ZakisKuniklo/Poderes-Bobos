@@ -141,6 +141,6 @@ def menu():
         elif window == janela7 and event == 'Adicionar':
             cm.addComment(values["nomeUsuario"],poderAtual,values["comentario"])
 
-#menu()
+menu()
 
     
