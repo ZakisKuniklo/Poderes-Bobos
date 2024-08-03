@@ -1,4 +1,4 @@
-#menu
+#menu Feito com a interface baseada da biblioteca pysimpleGUI
 from PySimpleGUI import PySimpleGUI as sg
 import poderaleatorio as pa
 import comment as cm
@@ -141,6 +141,6 @@ def menu():
         elif window == janela7 and event == 'Adicionar':
             cm.addComment(values["nomeUsuario"],poderAtual,values["comentario"])
 
-menu()
+#menu()
 
     
