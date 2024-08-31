@@ -2,6 +2,7 @@
 import poderaleatorio as pa #Manipulação do arquvio de poderes
 import comment as cm    #Manipulação do arquivo de comentários
 from tkinter import *
+from ttkthemes import ThemedTk
 
 
 #Lista de Poderes
@@ -26,7 +27,7 @@ def listaPoderesTkinter():
 #Menu Principal
 def MenuTkinter():
     #Instanciar menu
-    menu = Tk()
+    menu = ThemedTk(theme="equilux")
     menu.title("Poderes Bobos")
     menu.minsize(250,100)
     #Título
