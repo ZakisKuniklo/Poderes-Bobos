@@ -4,8 +4,8 @@ import comment as cm    #Manipulação do arquivo de comentários
 from tkinter import *
 from ttkthemes import ThemedTk
 
-def fecharJanela(janela):
-    menu.deiconify()
+def fecharJanela(anterior,janela):
+    anterior.deiconify()
     janela.destroy()
 
 #Lista de Poderes
@@ -13,12 +13,15 @@ def listaPoderesTkinter():
     #funções
     def selectItem():
         print(listboxPoderes.get(ANCHOR))
-    
+        telaListarComentario("comentario")
+     
     def fechar():
-        fecharJanela(listaPoderes)
-
+        fecharJanela(menu,listaPoderes)
+    
     #Instanciar Tela
+    global listaPoderes
     listaPoderes = Toplevel()
+    menu.withdraw()
     #Título
     titulo = Label (listaPoderes,text="Lista de poderes").grid(column=1,row=0,padx=5,pady=5)
     #lista
@@ -27,21 +30,34 @@ def listaPoderesTkinter():
     #Botões
     comentar = Button(listaPoderes,text="Comentar", command=selectItem).grid(column=1,row=3,padx=5)
     sair = Button(listaPoderes,text="Voltar", command=fechar).grid(column=2,row=3,pady=5)
-    
     #listaPoderes.mainloop()
+
+def telaListarComentario(comentario):
+    def fechar():
+        fecharJanela(listaPoderes,telaListarComentario)
+    #Instanciar Tela
+    telaListarComentario = Toplevel()
+    telaListarComentario.minsize(250,100)
+    listaPoderes.withdraw()
+    #Botões
+    sair = Button(telaListarComentario,text="Voltar", command=fechar).grid(column=2,row=3,pady=5)
 
 def telaGanharPoder():
     #Funções
     def fechar():
-        fecharJanela(ganharPoder)
+        fecharJanela(menu,ganharPoder)
     #Intanciar tela
     ganharPoder = Toplevel()
     ganharPoder.title("Você ganhou um poder")
     ganharPoder.minsize(250,100)
     menu.withdraw()
+    poder = pa.pegaPoder()
+    print(poder)
+    titulo = Label(ganharPoder,text=str(poder['nome']).encode('utf-8'))
+    titulo.grid(column=0,row=0,pady=5)
     texto = Text(ganharPoder,height=10,width=20)
     texto.grid(column=0,row=1,pady=5)
-    texto.insert(INSERT,str(pa.pegaPoder()['desc']).encode('utf-8'))
+    texto.insert(INSERT,str(poder['desc']).encode('utf-8'))
     sair = Button(ganharPoder,text="Voltar", command=fechar).grid(column=2,row=1,pady=5)
 
 #Menu Principal
