@@ -50,6 +50,7 @@ def telaGanharPoder():
     ganharPoder = Toplevel()
     ganharPoder.title("Você ganhou um poder")
     ganharPoder.minsize(250,100)
+    #ganharPoder.overrideredirect(True)
     menu.withdraw()
     poder = pa.pegaPoder()
     print(poder)
@@ -60,6 +61,31 @@ def telaGanharPoder():
     texto.insert(INSERT,str(poder['desc']).encode('utf-8'))
     sair = Button(ganharPoder,text="Voltar", command=fechar).grid(column=2,row=1,pady=5)
 
+
+def telaAdicionarPoder():
+    #Funções
+    def fechar():
+        fecharJanela(menu,adicionarPoder)
+    def armazenarPoder():
+        nomePoder = entryNome.get()
+        print(nomePoder)
+        descricaoPoder = textDescricao.get("1.0",END)
+        print(descricaoPoder)
+    #Instanciar janela
+    adicionarPoder = Toplevel()
+    adicionarPoder.title("Adicionar Novo Poder")
+    adicionarPoder.minsize(250,100)
+    menu.withdraw()
+    titulo = Label(adicionarPoder,text= 'Adicionar Novo Poder').grid(column=1,row=0,pady=5)
+    labelNome = Label(adicionarPoder,text= 'Nome:').grid(column=0,row=1,pady=5)
+    entryNome = Entry(adicionarPoder)
+    entryNome.grid(column=1,row=1,pady=5)
+    lableDescricao = Label(adicionarPoder,text= 'Descricao:').grid(column=0,row=2,pady=5)
+    textDescricao = Text(adicionarPoder,height=10,width=20)
+    textDescricao.grid(column=1,row=2,pady=5)
+    botaoAdicionarPoder = Button(adicionarPoder,text="Adicionar poder", command=armazenarPoder).grid(column=1,row=3,pady=5)
+    sair = Button(adicionarPoder,text="Voltar", command=fechar).grid(column=1,row=4,pady=5)
+
 #Menu Principal
 def MenuTkinter():
     global menu
@@ -67,13 +93,14 @@ def MenuTkinter():
     menu = ThemedTk(theme="equilux")
     menu.title("Poderes Bobos")
     menu.minsize(250,100)
+    menu.resizable(0,0)
     #Título
     titulo = Label(menu,text= 'Poderes bobos!!!').grid(column=1,row=0,pady=5)
     #Botões
-    listarPoderes = Button(menu,text="Listar Poderes",command=listaPoderesTkinter).grid(column=0,row=1,padx=5,pady=5)
-    ganharPoder = Button(menu,text="Ganhar Poder", command=telaGanharPoder).grid(column=0,row=2,padx=5,pady=5)
-    adicionarPoder = Button(menu,text="Adicionar Poder").grid(column=0,row=3,padx=10,pady=5)
-    sair = Button(menu,text="Sair", command=menu.destroy).grid(column=0,row=4,pady=5)
+    listarPoderes = Button(menu,text="Listar Poderes",command=listaPoderesTkinter).grid(column=1,row=1,padx=5,pady=5)
+    ganharPoder = Button(menu,text="Ganhar Poder", command=telaGanharPoder).grid(column=1,row=2,padx=5,pady=5)
+    adicionarPoder = Button(menu,text="Adicionar Poder",command=telaAdicionarPoder).grid(column=1,row=3,padx=10,pady=5)
+    sair = Button(menu,text="Sair", command=menu.destroy).grid(column=1,row=4,pady=5)
     #Manter janela Aberta
     menu.mainloop()
 
