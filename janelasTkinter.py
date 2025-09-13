@@ -12,8 +12,8 @@ def fecharJanela(anterior,janela):
 def listaPoderesTkinter(): 
     #funções
     def selectItem():
-        print(listboxPoderes.get(ANCHOR))
-        telaListarComentario("comentario")
+        #print(listboxPoderes.get(ANCHOR))
+        telaListarComentario(listboxPoderes.get(ANCHOR))
      
     def fechar():
         fecharJanela(menu,listaPoderes)
@@ -32,15 +32,30 @@ def listaPoderesTkinter():
     sair = Button(listaPoderes,text="Voltar", command=fechar).grid(column=2,row=3,pady=5)
     #listaPoderes.mainloop()
 
-def telaListarComentario(comentario):
+def telaListarComentario(poder):
+    comentarios = cm.showComment(poder)
+    lista = list()
+    for i in sorted(comentarios):
+        lista.append("usuário: "+ str(i["nome"]) + " poder: "+ str(i["poder"])+ "\n"+ str(i["data"]) + "\n"+str(i["comment"]))
+    bigString = ""
+    for t in lista:
+        bigString = bigString + t + "\n" 
     def fechar():
         fecharJanela(listaPoderes,telaListarComentario)
     #Instanciar Tela
     telaListarComentario = Toplevel()
-    telaListarComentario.minsize(250,100)
+    telaListarComentario.minsize(250,220)
     listaPoderes.withdraw()
+    #lista
+    #listboxPoderes = Listbox(telaListarComentario,listvariable=StringVar(value=lista))
+    #listboxPoderes.grid(column=1,row=1,padx=15,pady=5)
+    bigLista =  Text(telaListarComentario,yscrollcommand = True, xscrollcommand=True)
+    bigLista.grid(column=1,row=0,padx=5,pady=5)
+    bigLista.insert(END,bigString)
     #Botões
+    comentar = Button(telaListarComentario,text="Comentar", command=fechar).grid(column=1,row=3,pady=5)
     sair = Button(telaListarComentario,text="Voltar", command=fechar).grid(column=2,row=3,pady=5)
+
 
 def telaGanharPoder():
     #Funções
