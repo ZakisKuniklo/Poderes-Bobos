@@ -128,7 +128,8 @@ def menu():
             janela1.un_hide()
         elif window == janela5 and event == 'Adicionar':
             if values["nomePoder"] != "" and values["desc"] != "":
-                https://f95zone.to/                janela6 = telaPoderAdicionado()
+                pa.addItem({"nome":values["nomePoder"],"desc":values["desc"]},pa.file1)
+                janela6 = telaPoderAdicionado()
         elif window == janela6 and event == 'Voltar':
             janela6.hide()
         elif window == janela4 and event == 'Adicionar comentario':

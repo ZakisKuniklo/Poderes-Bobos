@@ -68,9 +68,12 @@ def telaAdicionarPoder():
         fecharJanela(menu,adicionarPoder)
     def armazenarPoder():
         nomePoder = entryNome.get()
-        print(nomePoder)
         descricaoPoder = textDescricao.get("1.0",END)
-        print(descricaoPoder)
+        descricaoPoder = descricaoPoder.rstrip()
+        pa.addItem({"nome":nomePoder,"desc":descricaoPoder},pa.file1)
+        textDescricao.delete("1.0",END)
+        entryNome.delete(0,END)
+        telaPoderAdicionado(adicionarPoder)
     #Instanciar janela
     adicionarPoder = Toplevel()
     adicionarPoder.title("Adicionar Novo Poder")
@@ -85,6 +88,17 @@ def telaAdicionarPoder():
     textDescricao.grid(column=1,row=2,pady=5)
     botaoAdicionarPoder = Button(adicionarPoder,text="Adicionar poder", command=armazenarPoder).grid(column=1,row=3,pady=5)
     sair = Button(adicionarPoder,text="Voltar", command=fechar).grid(column=1,row=4,pady=5)
+
+def telaPoderAdicionado(telaPoder):
+    #Funções
+    def fechar():
+        fecharJanela(telaPoder,poderAdicionado)
+    #Instanciar janela
+    poderAdicionado = Toplevel()
+    poderAdicionado.title("Poder Adicionado")
+    poderAdicionado.minsize(250,100)
+    titulo = Label(poderAdicionado,text= 'Poder Adicionado!').grid(column=1,row=0,pady=5)
+    sair = Button(poderAdicionado,text="Voltar", command=fechar).grid(column=1,row=4,pady=5)
 
 #Menu Principal
 def MenuTkinter():
