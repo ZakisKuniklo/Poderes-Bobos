@@ -28,34 +28,63 @@ def listaPoderesTkinter():
     listboxPoderes = Listbox(listaPoderes,listvariable=StringVar(value=pa.listaNomePoder()))
     listboxPoderes.grid(column=1,row=1,padx=5,pady=5)
     #Botões
-    comentar = Button(listaPoderes,text="Comentar", command=selectItem).grid(column=1,row=3,padx=5)
+    comentar = Button(listaPoderes,text="Comentários", command=selectItem).grid(column=1,row=3,padx=5)
     sair = Button(listaPoderes,text="Voltar", command=fechar).grid(column=2,row=3,pady=5)
     #listaPoderes.mainloop()
 
 def telaListarComentario(poder):
+    #Instanciar Lisa de Comentários
     comentarios = cm.showComment(poder)
+    print(comentarios)
     lista = list()
-    for i in sorted(comentarios):
+    for i in comentarios:
         lista.append("usuário: "+ str(i["nome"]) + " poder: "+ str(i["poder"])+ "\n"+ str(i["data"]) + "\n"+str(i["comment"]))
     bigString = ""
     for t in lista:
-        bigString = bigString + t + "\n" 
+        bigString = bigString + t + "\n"
+    #Funções 
     def fechar():
-        fecharJanela(listaPoderes,telaListarComentario)
+        fecharJanela(listaPoderes,listarComentario)
+    def acessarComentario():
+        telaAdicionarComentario(poder)
     #Instanciar Tela
-    telaListarComentario = Toplevel()
-    telaListarComentario.minsize(250,220)
+    listarComentario = Toplevel()
+    listarComentario.minsize(250,220)
     listaPoderes.withdraw()
     #lista
     #listboxPoderes = Listbox(telaListarComentario,listvariable=StringVar(value=lista))
     #listboxPoderes.grid(column=1,row=1,padx=15,pady=5)
-    bigLista =  Text(telaListarComentario,yscrollcommand = True, xscrollcommand=True)
+    bigLista =  Text(listarComentario,yscrollcommand = True, xscrollcommand=True)
     bigLista.grid(column=1,row=0,padx=5,pady=5)
     bigLista.insert(END,bigString)
     #Botões
-    comentar = Button(telaListarComentario,text="Comentar", command=fechar).grid(column=1,row=3,pady=5)
-    sair = Button(telaListarComentario,text="Voltar", command=fechar).grid(column=2,row=3,pady=5)
+    comentar = Button(listarComentario,text="Comentar", command=acessarComentario).grid(column=1,row=3,pady=5)
+    sair = Button(listarComentario,text="Voltar", command=fechar).grid(column=2,row=3,pady=5)
 
+def telaAdicionarComentario(poder):
+    #Funções
+    def fechar():
+        fecharJanela(menu,adicionarComentario)
+    def addCommentario():
+        cm.addComment(entryNick.get(),poder,textComment.get("1.0",END).rstrip())
+        textComment.delete("1.0",END)
+        entryNick.delete(0,END)
+    #Instanciar tela
+    adicionarComentario = Toplevel()
+    adicionarComentario.title("Adicionar Novo Comentário")
+    adicionarComentario.minsize(250,100)
+    #Campos
+    titulo = Label(adicionarComentario,text= 'Adicionar Novo Comentário').grid(column=1,row=0,pady=5)
+    nomePoder = Label(adicionarComentario,text= poder).grid(column=1,row=1,pady=5)
+    entryLabel= Label(adicionarComentario,text= 'Usuário:').grid(column=0,row=2,pady=5)
+    entryNick = Entry(adicionarComentario)
+    entryNick.grid(column=1,row=2,pady=5)
+    textLabel= Label(adicionarComentario,text= 'Comentário:').grid(column=0,row=3,pady=5)
+    textComment = Text(adicionarComentario,height=10,width=20)
+    textComment.grid(column=1,row=3,pady=5)
+    #Botões
+    comentar = Button(adicionarComentario,text="Comentar", command=addCommentario).grid(column=1,row=4,pady=5)
+    sair = Button(adicionarComentario,text="Voltar", command=fechar).grid(column=1,row=5,pady=5)
 
 def telaGanharPoder():
     #Funções
@@ -112,8 +141,10 @@ def telaPoderAdicionado(telaPoder):
     poderAdicionado = Toplevel()
     poderAdicionado.title("Poder Adicionado")
     poderAdicionado.minsize(250,100)
+    poderAdicionado.resizable(0,0)
     titulo = Label(poderAdicionado,text= 'Poder Adicionado!').grid(column=1,row=0,pady=5)
     sair = Button(poderAdicionado,text="Voltar", command=fechar).grid(column=1,row=4,pady=5)
+
 
 #Menu Principal
 def MenuTkinter():

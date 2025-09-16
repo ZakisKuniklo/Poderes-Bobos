@@ -5,7 +5,7 @@ from datetime import datetime
 def addComment(usuario,poder,texto):
     comentario = dict()
     comentario["nome"] = usuario
-    comentario["poder"] = poder["nome"]
+    comentario["poder"] = poder#["nome"]
     comentario["comment"] = texto
     comentario["data"] = datetime.now().strftime('%d/%m/%Y %H:%M')
     poderaleatorio.addItem(comentario,poderaleatorio.file2)
